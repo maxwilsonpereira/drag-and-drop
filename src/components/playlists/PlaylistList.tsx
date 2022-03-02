@@ -5,8 +5,8 @@ import { Droppable } from "react-beautiful-dnd";
 import classes from "./style.module.scss";
 
 interface props {
-  playlists: Array<IPlaylist>;
-  setPlaylists: React.Dispatch<React.SetStateAction<Array<IPlaylist>>>;
+  playlists: IPlaylist[];
+  setPlaylists: React.Dispatch<React.SetStateAction<IPlaylist[]>>;
 }
 
 const PlaylistList: React.FC<props> = ({ playlists, setPlaylists }) => {

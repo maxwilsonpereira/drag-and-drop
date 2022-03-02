@@ -7,7 +7,7 @@ const SingleTodo: React.FC<{
   index: number;
   playlists: IPlaylist[];
   playlist: IPlaylist;
-  setPlaylists: React.Dispatch<React.SetStateAction<Array<IPlaylist>>>;
+  setPlaylists: React.Dispatch<React.SetStateAction<IPlaylist[]>>;
 }> = ({ index, playlists, playlist, setPlaylists }) => {
   const handleDelete = (id: number) => {
     setPlaylists(playlists.filter((cur) => cur.id !== id));

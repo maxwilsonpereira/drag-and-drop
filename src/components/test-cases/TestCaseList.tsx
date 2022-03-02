@@ -5,8 +5,8 @@ import { Droppable } from "react-beautiful-dnd";
 import classes from "./style.module.scss";
 
 interface props {
-  testCases: Array<ITestCase>;
-  setTestCases: React.Dispatch<React.SetStateAction<Array<ITestCase>>>;
+  testCases: ITestCase[];
+  setTestCases: React.Dispatch<React.SetStateAction<ITestCase[]>>;
 }
 
 const TestCaseList: React.FC<props> = ({ testCases, setTestCases }) => {
@@ -27,7 +27,7 @@ const TestCaseList: React.FC<props> = ({ testCases, setTestCases }) => {
                 key={cur.id}
                 index={index}
                 testCases={testCases}
-                playlist={cur}
+                testCase={cur}
                 setTestCases={setTestCases}
               />
             ))}
