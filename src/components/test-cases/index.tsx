@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import TestCaseList from "./TestCaseList";
 import { ITestCase } from "../../interfaces/interfaces";
 import { getTestCases } from "../../services/http.service";
 
-const TestCases: React.FC = () => {
+const TestCases = () => {
   const [testCases, setTestCases] = useState<ITestCase[]>([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const TestCases: React.FC = () => {
       return;
     }
 
-    if (source.droppableId === "PlaylistList") {
+    if (source.droppableId === "TestCaseList") {
       let aux;
       let updated = testCases;
       aux = updated[source.index];
