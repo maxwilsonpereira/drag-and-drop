@@ -1,3 +1,7 @@
+@import "./styles/variables.scss";
+@import "./styles/utils.scss";
+@import "./styles/mixins.scss";
+
 html {
   font-family: sans-serif;
 }
@@ -6,6 +10,7 @@ body {
   scrollbar-width: thin;
   margin: 0;
   overflow-x: hidden;
+  background-color: $greyA;
 }
 
 ::-webkit-scrollbar {

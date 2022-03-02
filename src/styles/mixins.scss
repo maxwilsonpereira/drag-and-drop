@@ -1,0 +1,45 @@
+$boxShadowBlack: 0 0 10px black;
+$listItemTitleFont: 0.8em;
+$borderRadiusPrimary: 3px;
+
+@mixin listContainer {
+  padding: 8px 10px;
+  background-color: $greyC;
+  position: relative;
+}
+@mixin listContainerActive {
+  transition: 0.2s ease;
+}
+@mixin listItem {
+  display: flex;
+  padding: 6px 12px;
+  margin: 5px 0;
+  border-radius: $borderRadiusPrimary;
+  background-color: $greyB;
+  &:hover {
+    background-color: $greyBHover;
+    transition: 0.2s ease;
+  }
+}
+@mixin listItemDrag {
+  box-shadow: $boxShadowBlack;
+}
+@mixin listItemTitle {
+  font-size: $listItemTitleFont;
+  flex: 1;
+}
+@mixin listIcon {
+  margin-left: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  &:hover {
+    transition: 0.2s ease;
+    transform: rotate(25deg);
+  }
+}
+@mixin containerWrapper {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border-radius: $borderRadiusPrimary;
+  @include scrollbarLayout;
+}

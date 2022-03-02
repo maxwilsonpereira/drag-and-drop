@@ -1,0 +1,22 @@
+@mixin scrollbarLayout {
+  &::-webkit-scrollbar {
+    height: 8px !important;
+    width: 8px !important;
+    background-color: $greyC !important;
+    border-radius: 0 $borderRadiusPrimary $borderRadiusPrimary 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px !important;
+    background-color: $greyB !important;
+    border-radius: 3px;
+  }
+}
+@mixin disabledClass {
+  pointer-events: none;
+  opacity: 0.7;
+}
+@mixin centeredAligned {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
