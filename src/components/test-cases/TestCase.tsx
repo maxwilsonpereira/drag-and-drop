@@ -17,7 +17,7 @@ const SingleTodo: React.FC<{
     <Draggable
       draggableId={testCase.id.toString()}
       index={index}
-      isDragDisabled={testCases.length <= 1}
+      // isDragDisabled={testCases.length <= 1}
     >
       {(provided, snapshot) => (
         <div
@@ -30,10 +30,12 @@ const SingleTodo: React.FC<{
           ].join(" ")}
         >
           <span className={classes.listItemTitle}>{testCase.name}</span>
-          <AiFillDelete
-            className={classes.listIcon}
-            onClick={() => handleDelete(testCase.id)}
-          />
+          {!snapshot.isDragging && (
+            <AiFillDelete
+              className={classes.listIcon}
+              onClick={() => handleDelete(testCase.id)}
+            />
+          )}
         </div>
       )}
     </Draggable>

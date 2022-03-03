@@ -30,10 +30,12 @@ const SingleTodo: React.FC<{
           ].join(" ")}
         >
           <span className={classes.listItemTitle}>{playlist.name}</span>
-          <AiFillDelete
-            className={classes.listIcon}
-            onClick={() => handleDelete(playlist.id)}
-          />
+          {!snapshot.isDragging && (
+            <AiFillDelete
+              className={classes.listIcon}
+              onClick={() => handleDelete(playlist.id)}
+            />
+          )}
         </div>
       )}
     </Draggable>

@@ -6,9 +6,16 @@ export async function getPlaylists(): Promise<IPlaylist[]> {
   const { data } = await axios.get(
     "https://jsonplaceholder.typicode.com/users"
   );
+  let current = 0;
   data.forEach((cur: any) => {
-    playlists.push({ id: cur.id, name: cur.name });
+    playlists.push({
+      id: cur.id,
+      name: cur.name,
+      testCases: [cur.id + current, cur.id + current + 1, cur.id + current + 2],
+    });
+    current = current + 2;
   });
+  console.log("playlists: ", playlists);
   return playlists;
 }
 

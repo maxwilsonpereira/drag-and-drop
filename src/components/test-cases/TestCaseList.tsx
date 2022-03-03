@@ -32,8 +32,8 @@ const TestCaseList: React.FC<props> = ({
         >
           {(provided, snapshot) => (
             <div
+              style={{ minHeight: "calc(90%)" }} // droppable area
               className={[
-                classes.listContainer,
                 snapshot.isDraggingOver ? classes.listContainerActive : "",
               ].join(" ")}
               ref={provided.innerRef}
@@ -57,14 +57,14 @@ const TestCaseList: React.FC<props> = ({
 
       <div
         className={[classes.listContainer, classes.gridRight].join(" ")}
-        style={{ height: "calc(85vh + 20px" }} // 20 marginTop gridLeftDown
+        style={{ height: "calc(85vh + 20px)" }} // 20 marginTop gridLeftDown
       >
-        <div className={classes.listContainerTitle}>Playlist Name</div>
+        <div className={classes.listContainerTitle}>Playlist's Test Cases</div>
         <Droppable droppableId="TestCaseOfPlaylist">
           {(provided, snapshot) => (
             <div
+              style={{ minHeight: "calc(92%)" }} // droppable area
               className={[
-                classes.listContainer,
                 snapshot.isDraggingOver ? classes.listContainerActive : "",
               ].join(" ")}
               ref={provided.innerRef}

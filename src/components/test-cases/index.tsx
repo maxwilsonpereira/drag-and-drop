@@ -8,28 +8,20 @@ const TestCases = () => {
   const [testCases, setTestCases] = useState<ITestCase[]>([]);
   const [testsOfPlaylist, setTestsOfPlaylist] = useState<ITestCase[]>([]);
   const [testCaseListDisabled, setTestCaseListDisabled] = useState(false);
-  const [aaa, setAaa] = useState(10);
 
   useEffect(() => {
     getPlaylistsHandler();
     async function getPlaylistsHandler() {
       const res: ITestCase[] = await getTestCases();
-      setTestCases(res.slice(0, 20));
-      setTestsOfPlaylist(res.slice(20, 80));
+      setTestCases(res.slice(0, 30));
+      setTestsOfPlaylist(res.slice(30, 40));
     }
   }, []);
 
   const onDragEnd = (result: DropResult) => {
-    setAaa(200000);
     setTestCaseListDisabled(false);
     const { destination, source } = result;
     if (!destination) {
-      return;
-    }
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
       return;
     }
 

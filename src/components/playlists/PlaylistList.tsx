@@ -16,10 +16,10 @@ const PlaylistList: React.FC<props> = ({ playlists, setPlaylists }) => {
       <Droppable droppableId="PlaylistList">
         {(provided, snapshot) => (
           <div
-            className={[
-              classes.listContainer,
-              snapshot.isDraggingOver ? classes.listContainerActive : "",
-            ].join(" ")}
+            style={{ minHeight: "calc(75%)" }} // droppable area
+            className={
+              snapshot.isDraggingOver ? classes.listContainerActive : ""
+            }
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
