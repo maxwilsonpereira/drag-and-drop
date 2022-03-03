@@ -11,7 +11,7 @@ interface props {
 
 const PlaylistList: React.FC<props> = ({ playlists, setPlaylists }) => {
   return (
-    <div className={classes.listContainer} style={{ height: "20vh" }}>
+    <div className={classes.listContainer} style={{ height: "25vh" }}>
       <div className={classes.listContainerTitle}>Other Playlists</div>
       <Droppable droppableId="PlaylistList">
         {(provided, snapshot) => (
@@ -36,6 +36,7 @@ const PlaylistList: React.FC<props> = ({ playlists, setPlaylists }) => {
           </div>
         )}
       </Droppable>
+      <div className={classes.listContainerBottom} />
     </div>
   );
 };

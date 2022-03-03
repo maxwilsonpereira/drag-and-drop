@@ -20,7 +20,7 @@ $borderRadiusPrimary: 3px;
   overflow-x: hidden;
   overflow-y: scroll;
   border-radius: $borderRadiusPrimary;
-  padding: 0 10px 5px 10px;
+  padding: 0 10px;
   background-color: $greyC;
   position: relative;
 }
@@ -33,6 +33,14 @@ $borderRadiusPrimary: 3px;
   padding: 5px;
   z-index: 1;
   background-color: $greyC;
+}
+@mixin listContainerBottom {
+  position: sticky;
+  bottom: 0px;
+  padding: 8px 0;
+  z-index: 1;
+  background-color: $greyC;
+  border-radius: 0 0 $borderRadiusPrimary $borderRadiusPrimary;
 }
 @mixin listItem {
   display: flex;

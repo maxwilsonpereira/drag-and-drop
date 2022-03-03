@@ -52,11 +52,12 @@ const TestCaseList: React.FC<props> = ({
             </div>
           )}
         </Droppable>
+        <div className={classes.listContainerBottom} />
       </div>
 
       <div
         className={[classes.listContainer, classes.gridRight].join(" ")}
-        style={{ height: "calc(80vh + 25px" }} // 20 marginTop + 5 padding
+        style={{ height: "calc(85vh + 20px" }} // 20 marginTop gridLeftDown
       >
         <div className={classes.listContainerTitle}>Playlist Name</div>
         <Droppable droppableId="TestCaseOfPlaylist">
@@ -82,6 +83,7 @@ const TestCaseList: React.FC<props> = ({
             </div>
           )}
         </Droppable>
+        <div className={classes.listContainerBottom} />
       </div>
     </>
   );
