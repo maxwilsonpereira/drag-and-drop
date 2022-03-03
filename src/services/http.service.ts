@@ -19,8 +19,7 @@ export async function getTestCases() {
   );
   data.forEach((cur: any) => {
     const firstWords: string = cur.title.split(" ").slice(0, 2).join(" ");
-
-    testCases.push({ id: cur.id, name: firstWords });
+    testCases.push({ id: cur.id, name: cur.id + "- " + firstWords });
   });
   return testCases;
 }

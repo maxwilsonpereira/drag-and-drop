@@ -11,12 +11,13 @@ interface props {
 
 const PlaylistList: React.FC<props> = ({ playlists, setPlaylists }) => {
   return (
-    <div className={classes.listContainer}>
+    <div className={classes.listContainer} style={{ height: "20vh" }}>
+      <div className={classes.listContainerTitle}>Other Playlists</div>
       <Droppable droppableId="PlaylistList">
         {(provided, snapshot) => (
           <div
             className={[
-              classes.playlists,
+              classes.listContainer,
               snapshot.isDraggingOver ? classes.listContainerActive : "",
             ].join(" ")}
             ref={provided.innerRef}

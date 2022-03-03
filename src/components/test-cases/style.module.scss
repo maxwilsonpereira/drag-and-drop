@@ -7,6 +7,9 @@
 .listContainerActive {
   @include listContainerActive;
 }
+.listContainerTitle {
+  @include listContainerTitle;
+}
 .listItem {
   @include listItem;
 }
@@ -19,4 +22,10 @@
 }
 .listIcon {
   @include listIcon;
+}
+.gridLeftDown {
+  grid-area: gridLeftDown;
+}
+.gridRight {
+  grid-area: gridRight;
 }

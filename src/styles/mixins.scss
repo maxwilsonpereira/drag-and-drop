@@ -2,13 +2,37 @@ $boxShadowBlack: 0 0 10px black;
 $listItemTitleFont: 0.8em;
 $borderRadiusPrimary: 3px;
 
+@mixin scrollbarLayout {
+  &::-webkit-scrollbar {
+    height: 8px !important;
+    width: 8px !important;
+    background-color: $greyC !important;
+    border-radius: 0 $borderRadiusPrimary $borderRadiusPrimary 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px !important;
+    background-color: $greyB !important;
+    border-radius: 3px;
+  }
+}
 @mixin listContainer {
-  padding: 8px 10px;
+  @include scrollbarLayout;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border-radius: $borderRadiusPrimary;
+  padding: 0 10px 5px 10px;
   background-color: $greyC;
   position: relative;
 }
 @mixin listContainerActive {
   transition: 0.2s ease;
+}
+@mixin listContainerTitle {
+  position: sticky;
+  top: 0px;
+  padding: 5px;
+  z-index: 1;
+  background-color: $greyC;
 }
 @mixin listItem {
   display: flex;
@@ -36,10 +60,4 @@ $borderRadiusPrimary: 3px;
     transition: 0.2s ease;
     transform: rotate(25deg);
   }
-}
-@mixin containerWrapper {
-  overflow-x: hidden;
-  overflow-y: scroll;
-  border-radius: $borderRadiusPrimary;
-  @include scrollbarLayout;
 }

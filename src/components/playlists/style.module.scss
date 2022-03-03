@@ -7,6 +7,9 @@
 .listContainerActive {
   @include listContainerActive;
 }
+.listContainerTitle {
+  @include listContainerTitle;
+}
 .listItem {
   @include listItem;
 }
@@ -18,4 +21,8 @@
 }
 .listIcon {
   @include listIcon;
+}
+.gridLeftUp {
+  grid-area: gridLeftUp;
+  margin-bottom: 20px;
 }

@@ -28,12 +28,10 @@ const Playlists: React.FC = () => {
     }
 
     if (source.droppableId === "PlaylistList") {
-      let aux;
-      let updated = playlists;
-      aux = updated[source.index];
-      updated.splice(source.index, 1);
-      updated.splice(destination.index, 0, aux);
-      setPlaylists(updated);
+      const aux = playlists[source.index];
+      playlists.splice(source.index, 1);
+      playlists.splice(destination.index, 0, aux);
+      setPlaylists(playlists);
     }
   };
 

@@ -7,17 +7,17 @@
   margin: 0 auto !important;
 }
 .rootGrid {
-  max-width: 1200px;
-  padding: 40px 30px;
   display: grid;
   grid-template-columns: 30% 60%;
   justify-content: space-around;
   margin: 0 auto;
+  max-width: 1200px;
+  padding: 40px 30px;
   @media (max-width: 800px) {
     grid-template-columns: 42% 54%;
     padding: 20px 10px;
   }
-}
-.containerWrapper {
-  @include containerWrapper;
+  grid-template-areas:
+    "gridLeftUp gridRight"
+    "gridLeftDown gridRight";
 }
