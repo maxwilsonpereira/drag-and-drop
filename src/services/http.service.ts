@@ -15,7 +15,6 @@ export async function getPlaylists(): Promise<IPlaylist[]> {
     });
     current = current + 2;
   });
-  console.log("playlists: ", playlists);
   return playlists;
 }
 

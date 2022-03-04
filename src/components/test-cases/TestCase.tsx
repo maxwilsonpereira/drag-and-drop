@@ -7,7 +7,7 @@ const SingleTodo: React.FC<{
   index: number;
   testCases: ITestCase[];
   testCase: ITestCase;
-  setTestCases: React.Dispatch<React.SetStateAction<ITestCase[]>>;
+  setTestCases: (updated: ITestCase[]) => void;
 }> = ({ index, testCases, testCase, setTestCases }) => {
   const handleDelete = (id: number) => {
     setTestCases(testCases.filter((cur) => cur.id !== id));

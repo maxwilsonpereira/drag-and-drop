@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import PlaylistList from "./PlaylistList";
 import { IPlaylist } from "../../interfaces/interfaces";
-import { getPlaylists } from "../../services/http.service";
+import PlaylistList from "./PlaylistList";
 
-const Playlists: React.FC = () => {
-  const [playlists, setPlaylists] = useState<IPlaylist[]>([]);
-
-  useEffect(() => {
-    getPlaylistsHandler();
-    async function getPlaylistsHandler() {
-      const res: IPlaylist[] = await getPlaylists();
-      setPlaylists(res);
-    }
-  }, []);
-
+const Playlists: React.FC<{
+  playlists: IPlaylist[];
+  setPlaylists: (updated: IPlaylist[]) => void;
+}> = ({ playlists, setPlaylists }) => {
   const onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
     if (!destination) {
@@ -26,7 +18,6 @@ const Playlists: React.FC = () => {
     ) {
       return;
     }
-
     if (source.droppableId === "PlaylistList") {
       const aux = playlists[source.index];
       playlists.splice(source.index, 1);
@@ -37,7 +28,10 @@ const Playlists: React.FC = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <PlaylistList playlists={playlists} setPlaylists={setPlaylists} />
+      <PlaylistList
+        playlists={playlists}
+        setPlaylists={(updated) => setPlaylists(updated)}
+      />
     </DragDropContext>
   );
 };

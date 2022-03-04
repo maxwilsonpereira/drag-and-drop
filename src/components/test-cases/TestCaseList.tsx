@@ -6,9 +6,9 @@ import classes from "./style.module.scss";
 
 interface props {
   testCases: ITestCase[];
-  setTestCases: React.Dispatch<React.SetStateAction<ITestCase[]>>;
+  setTestCases: (updated: ITestCase[]) => void;
   testsOfPlaylist: ITestCase[];
-  setTestsOfPlaylist: React.Dispatch<React.SetStateAction<ITestCase[]>>;
+  setTestsOfPlaylist: (updated: ITestCase[]) => void;
   testCaseListDisabled: boolean;
 }
 

@@ -6,7 +6,7 @@ import classes from "./style.module.scss";
 
 interface props {
   playlists: IPlaylist[];
-  setPlaylists: React.Dispatch<React.SetStateAction<IPlaylist[]>>;
+  setPlaylists: (updated: IPlaylist[]) => void;
 }
 
 const PlaylistList: React.FC<props> = ({ playlists, setPlaylists }) => {
@@ -29,7 +29,7 @@ const PlaylistList: React.FC<props> = ({ playlists, setPlaylists }) => {
                 index={index}
                 playlists={playlists}
                 playlist={playlist}
-                setPlaylists={setPlaylists}
+                setPlaylists={(updated) => setPlaylists(updated)}
               />
             ))}
             {provided.placeholder}
