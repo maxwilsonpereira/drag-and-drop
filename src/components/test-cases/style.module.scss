@@ -1,11 +1,12 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
+@import "../../styles/utils.scss";
 
 .listContainer {
   @include listContainer;
 }
-.listContainerActive {
-  @include listContainerActive;
+.containerActive {
+  @include containerActive;
 }
 .listContainerTitle {
   @include listContainerTitle;
@@ -16,6 +17,12 @@
 .listItem {
   @include listItem;
 }
+.listItemEdit {
+  @include listItemEdit;
+}
+.newListItem {
+  @include newListItem;
+}
 .listItemDrag {
   @include listItemDrag;
 }
@@ -23,8 +30,29 @@
   @include listItemTitle;
   text-transform: capitalize;
 }
+.listItemInput {
+  @include listItemInput;
+}
+.disableScroll {
+  @include disableScroll;
+}
+.disabled {
+  @include disabled;
+}
+.messageContainer {
+  @include messageContainer;
+}
 .listIcon {
   @include listIcon;
+}
+.addIcon {
+  @include addIcon;
+}
+.editIcon {
+  @include editIcon;
+}
+.saveIcon {
+  @include saveIcon;
 }
 .gridLeftDown {
   grid-area: gridLeftDown;

@@ -4,8 +4,10 @@
 
 html {
   font-family: sans-serif;
+  * {
+    scroll-behavior: smooth;
+  }
 }
-
 body {
   scrollbar-width: thin;
   margin: 0;

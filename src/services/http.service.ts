@@ -9,9 +9,10 @@ export async function getPlaylists(): Promise<IPlaylist[]> {
   let current = 0;
   data.forEach((cur: any) => {
     playlists.push({
+      order: cur.id - 1,
       id: cur.id,
-      name: cur.name,
-      testCases: [cur.id + current, cur.id + current + 1, cur.id + current + 2],
+      name: cur.id + "- " + cur.name,
+      testCases: [],
     });
     current = current + 2;
   });
@@ -25,7 +26,11 @@ export async function getTestCases() {
   );
   data.forEach((cur: any) => {
     const firstWords: string = cur.title.split(" ").slice(0, 2).join(" ");
-    testCases.push({ id: cur.id, name: cur.id + "- " + firstWords });
+    testCases.push({
+      order: cur.id - 1,
+      id: cur.id,
+      name: cur.id + "- " + firstWords,
+    });
   });
   return testCases;
 }

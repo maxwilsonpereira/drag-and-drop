@@ -1,6 +1,7 @@
 $boxShadowBlack: 0 0 10px black;
 $listItemTitleFont: 0.8em;
 $borderRadiusPrimary: 3px;
+$borderSize: 2px;
 
 @mixin scrollbarLayout {
   &::-webkit-scrollbar {
@@ -11,7 +12,7 @@ $borderRadiusPrimary: 3px;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 3px !important;
-    background-color: $greyB !important;
+    background-color: white !important;
     border-radius: 3px;
   }
 }
@@ -23,35 +24,53 @@ $borderRadiusPrimary: 3px;
   padding: 0 10px;
   background-color: $greyC;
   position: relative;
-}
-@mixin listContainerActive {
-  transition: 0.2s ease;
+  box-sizing: border-box;
+  border: $borderSize solid transparent;
 }
 @mixin listContainerTitle {
   position: sticky;
   top: 0px;
   padding: 5px;
+  transform: scale(1.02, 1.02);
   z-index: 1;
   background-color: $greyC;
 }
 @mixin listContainerBottom {
-  position: sticky;
-  bottom: 0px;
-  padding: 8px 0;
   z-index: 1;
+  position: sticky;
+  overflow: hidden;
+  transform: translateY(2px);
+  bottom: 0px;
+  padding: 4px 0;
   background-color: $greyC;
-  border-radius: 0 0 $borderRadiusPrimary $borderRadiusPrimary;
+  border-radius: 0;
 }
 @mixin listItem {
   display: flex;
+  position: relative;
   padding: 6px 12px;
   margin: 5px 0;
   border-radius: $borderRadiusPrimary;
   background-color: $greyB;
+  border: $borderSize solid transparent;
   &:hover {
     background-color: $greyBHover;
     transition: 0.2s ease;
   }
+}
+@mixin listItemEdit {
+  @include listItem;
+
+  width: 85%;
+  border: none;
+  padding: 0;
+}
+@mixin newListItem {
+  background-color: $greyA;
+}
+@mixin containerActive {
+  border: $borderSize solid $greyE !important;
+  box-sizing: border-box;
 }
 @mixin listItemDrag {
   box-shadow: $boxShadowBlack;
@@ -60,12 +79,70 @@ $borderRadiusPrimary: 3px;
   font-size: $listItemTitleFont;
   flex: 1;
 }
+@mixin listItemInput {
+  border: none;
+  border: $borderSize solid transparent;
+  border-radius: $borderRadiusPrimary;
+  padding: 6px 12px;
+  background-color: $greyA;
+  width: 100%;
+}
+@mixin messageContainer {
+  text-align: center;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: $borderRadiusPrimary;
+  background-color: $greyB;
+}
+@mixin disableScroll {
+  padding: 0 18px 0 10px;
+  overflow: hidden;
+}
 @mixin listIcon {
   margin-left: 30px;
   font-size: 15px;
   cursor: pointer;
   &:hover {
     transition: 0.2s ease;
-    transform: rotate(25deg);
+    transform: rotate(15deg);
+  }
+}
+@mixin allIcons {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  border-radius: $borderRadiusPrimary;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    transform: rotate(10deg);
+  }
+}
+@mixin addIcon {
+  @include allIcons;
+  top: 4px;
+  right: 14px;
+  width: 0.8em;
+  height: 0.8em;
+  background-color: $greyB;
+}
+@mixin editIcon {
+  @include allIcons;
+  top: 7px;
+  right: 1.5em;
+  width: 13px;
+  height: 13px;
+}
+@mixin saveIcon {
+  @include allIcons;
+  top: 7px;
+  right: -1.4em;
+  width: 16px;
+  height: 16px;
+  background-color: $greyB;
+  @media (max-width: 800px) {
+    right: -1em;
   }
 }

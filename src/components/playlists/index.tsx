@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { IPlaylist } from "../../interfaces/interfaces";
 import PlaylistList from "./PlaylistList";
@@ -6,24 +6,31 @@ import PlaylistList from "./PlaylistList";
 const Playlists: React.FC<{
   playlists: IPlaylist[];
   setPlaylists: (updated: IPlaylist[]) => void;
-}> = ({ playlists, setPlaylists }) => {
+  selectedPlaylist?: IPlaylist;
+  setSelectedPlaylist: (cur: IPlaylist) => void;
+}> = ({ playlists, setPlaylists, setSelectedPlaylist, selectedPlaylist }) => {
   const onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
-    if (!destination) {
-      return;
-    }
+    if (!destination) return;
+
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
-    ) {
+    )
       return;
+
+    const clone = [...playlists];
+    clone[source.index].order = destination.index;
+    if (source.index < destination.index) {
+      for (let i = destination.index; i > source.index; i--) {
+        clone[i].order = clone[i].order - 1;
+      }
+    } else {
+      for (let i = destination.index; i < source.index; i++) {
+        clone[i].order = clone[i].order + 1;
+      }
     }
-    if (source.droppableId === "PlaylistList") {
-      const aux = playlists[source.index];
-      playlists.splice(source.index, 1);
-      playlists.splice(destination.index, 0, aux);
-      setPlaylists(playlists);
-    }
+    setPlaylists(clone);
   };
 
   return (
@@ -31,6 +38,8 @@ const Playlists: React.FC<{
       <PlaylistList
         playlists={playlists}
         setPlaylists={(updated) => setPlaylists(updated)}
+        selectedPlaylist={selectedPlaylist}
+        setSelectedPlaylist={(cur) => setSelectedPlaylist(cur)}
       />
     </DragDropContext>
   );

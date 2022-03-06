@@ -1,11 +1,12 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
+@import "../../styles/utils.scss";
 
 .listContainer {
   @include listContainer;
 }
-.listContainerActive {
-  @include listContainerActive;
+.containerActive {
+  @include containerActive;
 }
 .listContainerTitle {
   @include listContainerTitle;
@@ -15,6 +16,13 @@
 }
 .listItem {
   @include listItem;
+  cursor: pointer !important;
+}
+.listItemEdit {
+  @include listItemEdit;
+}
+.newListItem {
+  @include newListItem;
 }
 .listItemDrag {
   @include listItemDrag;
@@ -22,8 +30,26 @@
 .listItemTitle {
   @include listItemTitle;
 }
+.listItemInput {
+  @include listItemInput;
+}
+.disableScroll {
+  @include disableScroll;
+}
+.disabled {
+  @include disabled;
+}
 .listIcon {
   @include listIcon;
+}
+.addIcon {
+  @include addIcon;
+}
+.editIcon {
+  @include editIcon;
+}
+.saveIcon {
+  @include saveIcon;
 }
 .gridLeftUp {
   grid-area: gridLeftUp;
