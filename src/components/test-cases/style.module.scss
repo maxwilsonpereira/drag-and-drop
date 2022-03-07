@@ -54,6 +54,9 @@
 .saveIcon {
   @include saveIcon;
 }
+.noHoverGreyA {
+  @include noHoverGreyA;
+}
 .gridLeftDown {
   grid-area: gridLeftDown;
 }

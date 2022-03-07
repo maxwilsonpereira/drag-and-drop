@@ -38,6 +38,8 @@ const App: React.FC = () => {
           setTestCases={(updated) => setTestCases(updated)}
           selectedPlaylist={selectedPlaylist}
           setSelectedPlaylist={(cur) => setSelectedPlaylist(cur)}
+          playlists={playlists}
+          setPlaylists={(updated) => setPlaylists(updated)}
         />
       </div>
     </div>

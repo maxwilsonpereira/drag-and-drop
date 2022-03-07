@@ -16,6 +16,8 @@ const SingleTodo: React.FC<{
   isTestCaseList?: boolean;
   disableDrag: boolean;
   setDisableDrag: (val: boolean) => void;
+  playlists: IPlaylist[];
+  setPlaylists: (updated: IPlaylist[]) => void;
 }> = ({
   index,
   testCases,
@@ -26,6 +28,8 @@ const SingleTodo: React.FC<{
   isTestCaseList,
   disableDrag,
   setDisableDrag,
+  playlists,
+  setPlaylists,
 }) => {
   const [editing, setEditing] = useState<boolean[]>([]);
   const [newName, setNewName] = useState("");
@@ -56,7 +60,7 @@ const SingleTodo: React.FC<{
     setDisableDrag(false);
   }
 
-  function deletePlaylist(id: number) {
+  function deleteTestCase(id: number) {
     if (isTestCaseList) setTestCases(testCases.filter((cur) => cur.id !== id));
     else {
       if (selectedPlaylist && setSelectedPlaylist) {
@@ -64,6 +68,12 @@ const SingleTodo: React.FC<{
         const updatedTestCases = clone.testCases.filter((cur) => cur.id !== id);
         clone.testCases = updatedTestCases;
         setSelectedPlaylist(clone);
+
+        const clonePlaylists = [...playlists];
+        clonePlaylists[selectedPlaylist.order].testCases = playlists[
+          selectedPlaylist.order
+        ].testCases.filter((cur) => cur.id !== id);
+        setPlaylists(clonePlaylists);
       }
     }
   }
@@ -93,7 +103,7 @@ const SingleTodo: React.FC<{
     <Draggable
       draggableId={testCaseCur.id.toString()}
       index={index}
-      // isDragDisabled={testCases.length <= 1}
+      isDragDisabled={testCaseCur.isNew}
     >
       {(provided, snapshot) => (
         <div
@@ -105,21 +115,24 @@ const SingleTodo: React.FC<{
             snapshot.isDragging && classes.listItemDrag,
             testCaseCur.isNew && classes.newListItem,
             disableDrag && classes.disabled,
+            testCaseCur.isNew && classes.noHoverGreyA,
           ].join(" ")}
         >
-          <img
-            src={editIcon}
-            className={classes.editIcon}
-            alt="edit"
-            title="edit"
-            onClick={(e) => editTestCase(e)}
-          />
           <span className={classes.listItemTitle}>{testCaseCur.name}</span>
           {!snapshot.isDragging && (
-            <AiFillDelete
-              className={classes.listIcon}
-              onClick={() => deletePlaylist(testCaseCur.id)}
-            />
+            <>
+              <img
+                src={editIcon}
+                className={classes.editIcon}
+                alt="edit"
+                title="edit"
+                onClick={(e) => editTestCase(e)}
+              />
+              <AiFillDelete
+                className={classes.listIcon}
+                onClick={() => deleteTestCase(testCaseCur.id)}
+              />
+            </>
           )}
         </div>
       )}

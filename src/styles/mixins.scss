@@ -123,7 +123,7 @@ $borderSize: 2px;
 @mixin addIcon {
   @include allIcons;
   top: 4px;
-  right: 14px;
+  right: 4px;
   width: 0.8em;
   height: 0.8em;
   background-color: $greyB;
@@ -144,5 +144,10 @@ $borderSize: 2px;
   background-color: $greyB;
   @media (max-width: 800px) {
     right: -1em;
+  }
+}
+@mixin noHoverGreyA {
+  &:hover {
+    background-color: $greyA;
   }
 }

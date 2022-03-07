@@ -50,9 +50,15 @@ const PlaylistList: React.FC<props> = ({
       style={{ position: "relative", height: "25vh" }}
     >
       <div className={classes.listContainerTitle}>
-        Other Playlists
+        {playlists.length === 0
+          ? "Add a Playlist"
+          : selectedPlaylist && selectedPlaylist.id !== -1
+          ? "Other Playlists"
+          : "Select a Playlist"}
         <div
-          className={classes.addIcon}
+          className={[classes.addIcon, disableDrag && classes.disabled].join(
+            " "
+          )}
           title="add playlist"
           onClick={addPlaylist}
         >
@@ -79,7 +85,7 @@ const PlaylistList: React.FC<props> = ({
                   playlists={playlists}
                   playlistCur={cur}
                   setPlaylists={(updated) => setPlaylists(updated)}
-                  // selectedPlaylist={selectedPlaylist}
+                  selectedPlaylist={selectedPlaylist}
                   setSelectedPlaylist={(cur) => setSelectedPlaylist(cur)}
                   setDisableDrag={setDisableDrag}
                   disableDrag={disableDrag}

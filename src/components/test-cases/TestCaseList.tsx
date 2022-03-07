@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { IPlaylist, ITestCase } from "../../interfaces/interfaces";
 import TestCase from "./TestCase";
 import { Droppable } from "react-beautiful-dnd";
@@ -10,6 +10,8 @@ interface props {
   testCaseListDisabled: boolean;
   selectedPlaylist?: IPlaylist;
   setSelectedPlaylist: (cur: IPlaylist) => void;
+  playlists: IPlaylist[];
+  setPlaylists: (updated: IPlaylist[]) => void;
 }
 
 const TestCaseList: React.FC<props> = ({
@@ -18,6 +20,8 @@ const TestCaseList: React.FC<props> = ({
   testCaseListDisabled,
   selectedPlaylist,
   setSelectedPlaylist,
+  playlists,
+  setPlaylists,
 }) => {
   const [disableDrag, setDisableDrag] = useState(false);
 
@@ -35,7 +39,7 @@ const TestCaseList: React.FC<props> = ({
       isNew: true,
     });
     setTestCases(clone);
-    const listContainer = document.getElementById("other-playlists");
+    const listContainer = document.getElementById("test-cases");
     if (listContainer) {
       listContainer.scrollTop = 0;
     }
@@ -45,6 +49,7 @@ const TestCaseList: React.FC<props> = ({
     <>
       {/* ***** Test Cases ***** */}
       <div
+        id="test-cases"
         className={[
           classes.listContainer,
           classes.gridLeftDown,
@@ -55,7 +60,9 @@ const TestCaseList: React.FC<props> = ({
         <div className={classes.listContainerTitle}>
           Test Cases
           <div
-            className={classes.addIcon}
+            className={[classes.addIcon, disableDrag && classes.disabled].join(
+              " "
+            )}
             title="add test case"
             onClick={addTestCase}
           >
@@ -92,6 +99,8 @@ const TestCaseList: React.FC<props> = ({
                         isTestCaseList={true}
                         disableDrag={disableDrag}
                         setDisableDrag={setDisableDrag}
+                        playlists={playlists}
+                        setPlaylists={setPlaylists}
                       />
                     );
                   } else return null;
@@ -109,16 +118,17 @@ const TestCaseList: React.FC<props> = ({
         style={{ height: "calc(85vh + 20px)" }} // 20 marginTop gridLeftDown
       >
         <div className={classes.listContainerTitle}>
-          {selectedPlaylist
+          {selectedPlaylist && selectedPlaylist.id >= 0
             ? selectedPlaylist.name + "s Test Cases"
-            : "Select a Playlist"}
+            : "No Playlist Selected"}
         </div>
-        {selectedPlaylist?.testCases.length === 0 && (
-          <div className={classes.messageContainer}>
-            drag and drop <b>below</b> the desired test cases fom the Test Cases
-            list in the desired order
-          </div>
-        )}
+        {selectedPlaylist?.testCases.length === 0 &&
+          selectedPlaylist.id !== -1 && (
+            <div className={classes.messageContainer}>
+              drag and drop <b>below</b> the desired test cases fom the Test
+              Cases list in the desired order
+            </div>
+          )}
 
         <Droppable droppableId="TestCaseOfPlaylist">
           {(provided, snapshot) => (
@@ -133,6 +143,8 @@ const TestCaseList: React.FC<props> = ({
               {selectedPlaylist?.testCases
                 ?.sort((a, b) => (a.order < b.order ? -1 : 1))
                 .map((cur: any, index) => {
+                  if (!playlists?.find((e) => e.id === selectedPlaylist?.id))
+                    return null;
                   return (
                     <TestCase
                       key={cur.id}
@@ -144,6 +156,8 @@ const TestCaseList: React.FC<props> = ({
                       setSelectedPlaylist={setSelectedPlaylist}
                       disableDrag={disableDrag}
                       setDisableDrag={setDisableDrag}
+                      playlists={playlists}
+                      setPlaylists={setPlaylists}
                     />
                   );
                 })}

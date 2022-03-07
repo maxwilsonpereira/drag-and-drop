@@ -8,7 +8,16 @@ const TestCases: React.FC<{
   setTestCases: (updated: ITestCase[]) => void;
   selectedPlaylist?: IPlaylist;
   setSelectedPlaylist: (cur: IPlaylist) => void;
-}> = ({ testCases, setTestCases, selectedPlaylist, setSelectedPlaylist }) => {
+  playlists: IPlaylist[];
+  setPlaylists: (updated: IPlaylist[]) => void;
+}> = ({
+  testCases,
+  setTestCases,
+  selectedPlaylist,
+  setSelectedPlaylist,
+  playlists,
+  setPlaylists,
+}) => {
   const [testCaseListDisabled, setTestCaseListDisabled] = useState(false);
 
   const onDragEnd = (result: DropResult) => {
@@ -88,6 +97,8 @@ const TestCases: React.FC<{
         testCaseListDisabled={testCaseListDisabled}
         selectedPlaylist={selectedPlaylist}
         setSelectedPlaylist={setSelectedPlaylist}
+        playlists={playlists}
+        setPlaylists={setPlaylists}
       />
     </DragDropContext>
   );

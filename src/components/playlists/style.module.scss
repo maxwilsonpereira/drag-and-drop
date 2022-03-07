@@ -16,7 +16,6 @@
 }
 .listItem {
   @include listItem;
-  cursor: pointer !important;
 }
 .listItemEdit {
   @include listItemEdit;
@@ -50,6 +49,9 @@
 }
 .saveIcon {
   @include saveIcon;
+}
+.noHoverGreyA {
+  @include noHoverGreyA;
 }
 .gridLeftUp {
   grid-area: gridLeftUp;

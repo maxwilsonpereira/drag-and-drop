@@ -11,7 +11,7 @@ const SingleTodo: React.FC<{
   playlists: IPlaylist[];
   playlistCur: IPlaylist;
   setPlaylists: (updated: IPlaylist[]) => void;
-  // selectedPlaylist?: IPlaylist;
+  selectedPlaylist?: IPlaylist;
   setSelectedPlaylist: (cur: IPlaylist) => void;
   disableDrag: boolean;
   setDisableDrag: (val: boolean) => void;
@@ -20,7 +20,7 @@ const SingleTodo: React.FC<{
   playlists,
   playlistCur,
   setPlaylists,
-  // selectedPlaylist,
+  selectedPlaylist,
   setSelectedPlaylist,
   disableDrag,
   setDisableDrag,
@@ -57,6 +57,14 @@ const SingleTodo: React.FC<{
   function deletePlaylist(e: any, id: number) {
     e.stopPropagation();
     setPlaylists(playlists.filter((cur) => cur.id !== id));
+    if (selectedPlaylist && selectedPlaylist.id === id) {
+      setSelectedPlaylist({
+        order: -1,
+        id: -1,
+        name: "",
+        testCases: [],
+      });
+    }
   }
 
   if (editing[playlistCur.order])
@@ -85,7 +93,7 @@ const SingleTodo: React.FC<{
       <Draggable
         draggableId={playlistCur.id.toString()}
         index={index}
-        isDragDisabled={playlists.length <= 1}
+        isDragDisabled={playlists.length <= 1 || playlistCur.isNew}
       >
         {(provided, snapshot) => (
           <div
@@ -94,29 +102,36 @@ const SingleTodo: React.FC<{
             className={[
               classes.listItem,
               snapshot.isDragging && classes.listItemDrag,
-              // selectedPlaylist &&
-              //   selectedPlaylist.id === playlistCur.id &&
-              //   classes.containerActive,
+              selectedPlaylist &&
+                selectedPlaylist.id === playlistCur.id &&
+                classes.containerActive,
               playlistCur.isNew && classes.newListItem,
               disableDrag && classes.disabled,
+              playlistCur.isNew && classes.noHoverGreyA,
             ].join(" ")}
             ref={provided.innerRef}
-            onClick={() => setSelectedPlaylist(playlistCur)}
+            onClick={
+              !playlistCur.isNew
+                ? () => setSelectedPlaylist(playlistCur)
+                : undefined
+            }
           >
-            <img
-              src={editIcon}
-              className={classes.editIcon}
-              alt="edit"
-              title="edit"
-              onClick={(e) => editPlaylist(e)}
-            />
             <span className={classes.listItemTitle}>{playlistCur.name}</span>
             {!snapshot.isDragging && (
-              <AiFillDelete
-                className={classes.listIcon}
-                title="erase"
-                onClick={(e) => deletePlaylist(e, playlistCur.id)}
-              />
+              <>
+                <img
+                  src={editIcon}
+                  className={classes.editIcon}
+                  alt="edit"
+                  title="edit"
+                  onClick={(e) => editPlaylist(e)}
+                />
+                <AiFillDelete
+                  className={classes.listIcon}
+                  title="erase"
+                  onClick={(e) => deletePlaylist(e, playlistCur.id)}
+                />
+              </>
             )}
           </div>
         )}
